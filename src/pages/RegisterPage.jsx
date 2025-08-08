@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../contextAPI/AuthContext";
 import { toast } from "react-hot-toast";
 import { FiMail, FiLock, FiUser } from "react-icons/fi";
@@ -103,9 +103,9 @@ const RegisterPage = () => {
           </form>
           <p className="mt-4 text-center text-sm text-gray-600">
             Already have an account?
-            <a href="/login" className="text-blue-600 hover:underline">
+            <Link to="/login" className="text-blue-600 hover:underline">
               Login
-            </a>
+            </Link>
           </p>
         </div>
       </div>

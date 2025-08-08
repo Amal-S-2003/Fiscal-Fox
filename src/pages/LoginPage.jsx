@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contextAPI/AuthContext';
 import { toast } from 'react-hot-toast';
 import { FiMail, FiLock } from 'react-icons/fi';
@@ -77,7 +77,7 @@ const email = formData.email.trim();
 
           <p className="mt-4 text-center text-sm text-gray-600">
             Don&apos;t have an account?{' '}
-            <a href="/register" className="text-blue-600 hover:underline">Register</a>
+            <Link to="/register" className="text-blue-600 hover:underline">Register</Link>
           </p>
         </div>
         {/* Right side:  Image + Logo + Slogan */}
