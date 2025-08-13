@@ -1,4 +1,3 @@
-// src/pages/Dashboard.jsx
 import React, { useState, useContext } from "react";
 import { TransactionContext } from "../contextAPI/TransactionContext";
 import {
@@ -126,6 +125,7 @@ const Dashboard = () => {
 
   const incomeByCategory = groupByCategory(incomeTransactions);
   const expenseByCategory = groupByCategory(expenseTransactions);
+console.log(incomeByCategory,"incomeByCategory");
 
   return (
     <div className="min-h-screen bg-gray-100 p-6">

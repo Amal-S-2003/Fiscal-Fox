@@ -63,80 +63,12 @@ export const TransactionProvider = ({ children }) => {
     toast.success("Transaction deleted successfully!");
   };
 
-  // Filtering
-  const filterByType = (type) => transactions.filter((tx) => tx.type === type);
-  const filterByCategory = (category) =>
-    transactions.filter((tx) => tx.category === category);
-  const filterByDateRange = (startDate, endDate) =>
-    transactions.filter((tx) => {
-      const d = new Date(tx.date);
-      return d >= new Date(startDate) && d <= new Date(endDate);
-    });
-
-  // Sorting
-  const sortByAmount = (asc = true) =>
-    [...transactions].sort((a, b) =>
-      asc ? a.amount - b.amount : b.amount - a.amount
-    );
-  const sortByDate = (asc = true) =>
-    [...transactions].sort((a, b) =>
-      asc
-        ? new Date(a.date) - new Date(b.date)
-        : new Date(b.date) - new Date(a.date)
-    );
-
-  // Dashboard summaries
-  const totalIncome = filterByType("Income").reduce(
-    (sum, tx) => sum + tx.amount,
-    0
-  );
-  const totalExpense = filterByType("Expense").reduce(
-    (sum, tx) => sum + tx.amount,
-    0
-  );
-  const currentBalance = totalIncome - totalExpense;
-
-  // Monthly average calculations
-  const monthMap = {};
-  transactions.forEach((tx) => {
-    const key = getMonthYear(tx.date);
-    if (!monthMap[key]) monthMap[key] = [];
-    monthMap[key].push(tx);
-  });
-
-  const incomeMonths = Object.values(monthMap).map((group) =>
-    group
-      .filter((tx) => tx.type === "Income")
-      .reduce((sum, tx) => sum + tx.amount, 0)
-  );
-  const expenseMonths = Object.values(monthMap).map((group) =>
-    group
-      .filter((tx) => tx.type === "Expense")
-      .reduce((sum, tx) => sum + tx.amount, 0)
-  );
-
-  const averageIncome = incomeMonths.length
-    ? incomeMonths.reduce((a, b) => a + b, 0) / incomeMonths.length
-    : 0;
-  const averageExpense = expenseMonths.length
-    ? expenseMonths.reduce((a, b) => a + b, 0) / expenseMonths.length
-    : 0;
 
   const value = {
     transactions,
     addTransaction,
     updateTransaction,
     deleteTransaction,
-    filterByType,
-    filterByCategory,
-    filterByDateRange,
-    sortByAmount,
-    sortByDate,
-    totalIncome,
-    totalExpense,
-    currentBalance,
-    averageIncome,
-    averageExpense,
   };
 
   return (
